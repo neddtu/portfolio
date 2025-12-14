@@ -1,16 +1,120 @@
-# React + Vite
+# Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive portfolio website built with React and TailwindCSS.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19.1.4-61DAFB?style=flat&logo=react&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=flat&logo=vite&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🌙 Dark/Light mode toggle
+- 📱 Fully responsive design
+- ⚡ Fast loading with Vite
+- 🎨 Modern UI with animations (Framer Motion)
+- 🔧 Easy to customize - all data in one file
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React 19** - UI Library
+- **TailwindCSS 4** - Styling
+- **Vite 7** - Build Tool
+- **Framer Motion** - Animations
+- **Lucide React** - Icons
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Project Structure
+
+```
+src/
+├── components/       # React components
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   ├── Experience.jsx
+│   ├── Header.jsx
+│   ├── Hero.jsx
+│   ├── Projects.jsx
+│   ├── ScrollToTop.jsx
+│   └── ThemeToggle.jsx
+├── context/          # React context
+│   └── ThemeContext.jsx
+├── data/             # Centralized data
+│   └── index.js      # All portfolio content here
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js >= 20.x
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/tucoi052/portfolio.git
+
+# Navigate to project
+cd portfolio
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Start development server
+npm run dev
+# or
+yarn dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+## 🐳 Docker Deployment
+
+```bash
+# Build and run with Docker Compose
+docker-compose up -d --build
+
+# Or run manually
+docker build -t portfolio .
+docker run -d -p 2211:80 portfolio
+```
+
+The site will be available at `http://localhost:2211`
+
+## ✏️ Customization
+
+All content is centralized in `src/data/index.js`:
+
+- `personalInfo` - Name, email, phone, GitHub, CV path
+- `roles` - Typing animation roles
+- `stats` - Experience statistics
+- `skills` - Technical skills list
+- `experiences` - Work experience
+- `projects` - Featured projects
+- `menuItems` - Navigation menu
+- `education` - Education info
+- `activities` - Activities info
+
+Just edit this file to update your portfolio content!
+
+## 📄 License
+
+MIT License - feel free to use this for your own portfolio!
+
+## 👤 Author
+
+**Duong Dinh Tu**
+
+- GitHub: [@tucoi052](https://github.com/tucoi052)
+- Email: tucoi052@gmail.com
