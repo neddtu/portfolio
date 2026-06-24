@@ -1,146 +1,151 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Users, Code, Sparkles } from "lucide-react";
-import { skills, education, activities } from "../data";
+import { GraduationCap, Users } from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import { skillGroups, skills, education, activities } from "../data";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0 },
+};
+
+const InfoCard = ({ icon: Icon, kicker, title, subtitle, period }) => (
+  <motion.div
+    variants={fadeUp}
+    className="group rounded-2xl border border-line bg-elev p-6 transition-colors hover:border-line-strong"
+  >
+    <div className="flex items-center gap-3">
+      <span className="grid h-10 w-10 place-items-center rounded-xl border border-line text-accent-text transition-colors group-hover:border-accent">
+        <Icon size={18} />
+      </span>
+      <span className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+        {kicker}
+      </span>
+    </div>
+    <h4 className="mt-4 font-medium text-fg">{title}</h4>
+    <p className="text-sm text-accent-text">{subtitle}</p>
+    <p className="mt-1 font-mono text-xs text-faint">{period}</p>
+  </motion.div>
+);
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="py-12 md:py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300 relative overflow-hidden"
-    >
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-100 dark:bg-cyan-900/20 rounded-full blur-3xl opacity-50"></div>
+    <section id="about" className="relative px-6 py-24 md:py-36">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading index="01" label="About">
+          The details are what make
+          software feel <span className="text-accent-text italic">right</span>.
+        </SectionHeading>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-10 md:mb-16"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-4">
-            <Sparkles className="inline w-4 h-4 mr-1" />
-            About Me
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            About{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Me
-            </span>
-          </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full"></div>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="mt-16 grid gap-14 lg:grid-cols-12">
+          {/* Narrative */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ staggerChildren: 0.12 }}
+            className="lg:col-span-7"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <span className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg text-white">
-                <Code size={20} />
-              </span>
-              Get to know me!
-            </h3>
-            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.6 }}
+              className="space-y-5 text-lg leading-relaxed text-muted"
+            >
               <p>
-                I am an accomplished React developer with{" "}
-                <span className="font-semibold text-blue-600 dark:text-blue-400">
-                  5+ years of experience
-                </span>{" "}
-                in software application design, analysis, and development. I have a
-                strong background in working with JavaScript and TypeScript across
-                various platforms including React Native, ReactJS, and NextJS.
+                I'm an accomplished React developer with{" "}
+                <span className="font-medium text-fg">5+ years</span> of
+                experience across software design, analysis, and development —
+                fluent in JavaScript and TypeScript on ReactJS, NextJS, and
+                React Native.
               </p>
               <p>
-                I pride myself on my high responsibility and willingness to learn
-                new platforms and technologies. I also have experience with
-                animations, backend technologies like NodeJS and NestJS, and
-                deploying applications to Play Store and App Store.
+                I take pride in writing clean, maintainable code and in the
+                willingness to learn whatever a problem needs. Beyond the
+                frontend, I work with animations, backend stacks like NodeJS and
+                NestJS, and the full path of shipping apps to the Play Store and
+                App Store.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Education Card */}
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl text-white">
-                    <GraduationCap size={24} />
-                  </div>
-                  <h4 className="font-bold text-gray-900 dark:text-white">Education</h4>
-                </div>
-                <h5 className="font-semibold text-gray-800 dark:text-gray-200">
-                  {education.school}
-                </h5>
-                <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">
-                  {education.major}
-                </p>
-                <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                  {education.period}
-                </p>
-              </motion.div>
-
-              {/* Activity Card */}
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl text-white">
-                    <Users size={24} />
-                  </div>
-                  <h4 className="font-bold text-gray-900 dark:text-white">Activities</h4>
-                </div>
-                <h5 className="font-semibold text-gray-800 dark:text-gray-200">
-                  {activities.organization}
-                </h5>
-                <p className="text-cyan-600 dark:text-cyan-400 text-sm font-medium">
-                  {activities.role}
-                </p>
-                <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                  {activities.period}
-                </p>
-              </motion.div>
-            </div>
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
+              className="mt-10 grid gap-4 sm:grid-cols-2"
+            >
+              <InfoCard
+                icon={GraduationCap}
+                kicker="Education"
+                title={education.school}
+                subtitle={education.major}
+                period={education.period}
+              />
+              <InfoCard
+                icon={Users}
+                kicker="Activities"
+                title={activities.organization}
+                subtitle={activities.role}
+                period={activities.period}
+              />
+            </motion.div>
           </motion.div>
 
+          {/* Skills grouped */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ staggerChildren: 0.1 }}
+            className="lg:col-span-5"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <span className="p-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg text-white">
-                <Sparkles size={20} />
-              </span>
-              My Skills
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.03 }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-medium shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all cursor-default relative overflow-hidden group"
-                >
-                  <span className={`absolute inset-0 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-10 transition-opacity`}></span>
-                  {skill.name}
-                </motion.span>
+            <motion.h3
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="font-mono text-xs uppercase tracking-[0.3em] text-faint"
+            >
+              Toolbox
+            </motion.h3>
+
+            <div className="mt-6 space-y-7">
+              {skillGroups.map((group) => (
+                <motion.div key={group.label} variants={fadeUp} transition={{ duration: 0.5 }}>
+                  <div className="mb-3 flex items-baseline gap-3">
+                    <span className="font-medium text-fg">{group.label}</span>
+                    <span className="h-px flex-1 bg-line" />
+                    <span className="font-mono text-xs text-faint tnum">
+                      {String(group.items.length).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-lg border border-line bg-elev px-3 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-fg"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* Full-bleed skills marquee */}
+      <div className="marquee-mask mt-20 overflow-hidden border-y border-line py-5">
+        <div className="animate-marquee flex w-max gap-8 whitespace-nowrap">
+          {[...skills, ...skills].map((skill, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-8 font-display text-2xl text-faint"
+            >
+              {skill}
+              <span className="text-accent-text">✦</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>

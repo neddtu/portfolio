@@ -1,22 +1,189 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   Type system — editorial pairing
+   Fraunces (display serif) · Inter (UI/body) · JetBrains Mono (technical)
+   ============================================================ */
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+}
+
+/* ============================================================
+   Semantic color tokens — swap per theme.
+   `--accent` = brand lime for fills/decoration
+   `--accent-text` = contrast-safe lime for text/links
+   `--on-accent` = text placed on top of an accent fill
+   ============================================================ */
+:root {
+  --bg: #f7f6f2;
+  --bg-elev: #ffffff;
+  --bg-soft: #efeee8;
+  --fg: #1c1917;
+  --fg-muted: #57534e;
+  --fg-faint: #79746e;
+  --line: rgba(28, 25, 23, 0.10);
+  --line-strong: rgba(28, 25, 23, 0.18);
+  --accent: #84cc16;
+  --accent-text: #4d7c0f;
+  --on-accent: #0a0a0b;
+  --accent-soft: rgba(132, 204, 22, 0.14);
+  --glow: rgba(132, 204, 22, 0.20);
+}
+
+html.dark {
+  --bg: #0a0a0b;
+  --bg-elev: #141416;
+  --bg-soft: #1b1b1f;
+  --fg: #f5f4f1;
+  --fg-muted: #a1a1aa;
+  --fg-faint: #6f6f78;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --accent: #bef264;
+  --accent-text: #bef264;
+  --on-accent: #0a0a0b;
+  --accent-soft: rgba(190, 242, 100, 0.12);
+  --glow: rgba(190, 242, 100, 0.22);
+}
+
+/* Register tokens as Tailwind utilities (bg-bg, text-fg, border-line, …) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-elev: var(--bg-elev);
+  --color-soft: var(--bg-soft);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-faint: var(--fg-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
 html {
   scroll-behavior: smooth;
-}
-
-/* Dark mode base styles */
-html {
   color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-
 html.dark {
   color-scheme: dark;
 }
 
-/* Ensure proper dark mode transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01", "cv02";
+}
+
+/* Theme-change crossfade — limited to colors so it never blocks input */
+body,
+[data-theme-fade] {
+  transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Editorial display defaults — optical sizing makes Fraunces sing at large sizes */
+.font-display {
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.02em;
+}
+
+/* Tabular figures for stats / numeric data (prevents layout shift) */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   Focus — visible, on-brand, accessible
+   ============================================================ */
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Decorative utilities
+   ============================================================ */
+/* Fine grain overlay for editorial paper/film feel */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.dark .grain::before {
+  opacity: 0.05;
+}
+
+/* Hairline grid background for sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+}
+
+/* Animated accent glow blob */
+.glow-blob {
+  background: radial-gradient(circle at center, var(--glow), transparent 70%);
+  filter: blur(40px);
+}
+
+/* Marquee for the skills ribbon */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); }
+
+/* ============================================================
+   Motion preferences
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-marquee { animation: none !important; }
 }

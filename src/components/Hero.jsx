@@ -1,181 +1,244 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Code2, Smartphone, MapPin } from "lucide-react";
 import { personalInfo, roles, stats } from "../data";
+
+// Reusable rise-in transition for staggered hero content
+const rise = {
+  hidden: { opacity: 0, y: 24 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
 
 const Hero = () => {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Typewriter cycle through roles
   useEffect(() => {
     const currentRole = roles[currentRoleIndex];
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentRole.length) {
-          setDisplayText(currentRole.slice(0, displayText.length + 1));
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          if (displayText.length < currentRole.length) {
+            setDisplayText(currentRole.slice(0, displayText.length + 1));
+          } else {
+            setTimeout(() => setIsDeleting(true), 1800);
+          }
         } else {
-          setTimeout(() => setIsDeleting(true), 2000);
+          if (displayText.length > 0) {
+            setDisplayText(displayText.slice(0, -1));
+          } else {
+            setIsDeleting(false);
+            setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+          }
         }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
-
+      },
+      isDeleting ? 45 : 95
+    );
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentRoleIndex]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-16 pb-32 px-4 dark:bg-gray-900 transition-colors duration-300 overflow-hidden"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 pb-20"
     >
-      {/* Animated Background Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300 dark:bg-purple-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-cyan-300 dark:bg-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-pink-300 dark:bg-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70 animate-pulse" style={{ animationDelay: '4s' }}></div>
-      </div>
+      {/* Background: hairline grid + accent glow */}
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-60" aria-hidden="true" />
+      <div className="glow-blob pointer-events-none absolute -top-32 right-[-10%] h-[36rem] w-[36rem]" aria-hidden="true" />
+      <div className="glow-blob pointer-events-none absolute bottom-[-15%] left-[-10%] h-[28rem] w-[28rem] opacity-60" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-12">
+        {/* ---- Left: copy ---- */}
+        <div className="lg:col-span-7">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex-1 text-center md:text-left"
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={0}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-elev/60 px-3.5 py-1.5 backdrop-blur-sm"
           >
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mt-8 sm:mt-0 mb-6"
-            >
-              👋 Welcome to my portfolio
-            </motion.span>
-            
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-              Hi, I'm{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                {personalInfo.name}
-              </span>
-            </h1>
-            
-            <div className="text-xl sm:text-2xl md:text-4xl text-gray-600 dark:text-gray-300 mb-6 min-h-12 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-1 sm:gap-2">
-              <span className="whitespace-nowrap">I'm a</span>
-              <span className="text-blue-600 dark:text-blue-400 font-semibold text-center sm:text-left">
-                {displayText}
-                <span className="inline-block w-0.5 h-6 sm:h-8 bg-indigo-600 dark:bg-indigo-400 ml-1 animate-pulse"></span>
-              </span>
-            </div>
-            
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto md:mx-0 leading-relaxed">
-              Accomplished <span className="font-semibold text-blue-600 dark:text-blue-400">5+ years</span> as a React developer in software application
-              design, analysis, and development. High responsibility in working and passionate about 
-              building <span className="font-semibold">high-quality</span> web and mobile applications.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300"
-              >
-                View Projects <ArrowRight className="ml-2" size={20} />
-              </motion.a>
-              <motion.a
-                href={personalInfo.cvPath}
-                download="Duong-Dinh-Tu-CV.pdf"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:border-blue-500 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
-              >
-                Download CV <Download className="ml-2" size={20} />
-              </motion.a>
-            </div>
-            
-            {/* Stats */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-3 gap-4 sm:gap-8 mt-12"
-            >
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-500 dark:text-gray-400 text-sm">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            <span className="font-mono text-xs text-muted">
+              Available for new projects
+            </span>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex-1"
+          <motion.p
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={1}
+            className="mt-7 font-mono text-sm uppercase tracking-[0.35em] text-faint"
           >
-            <div className="relative w-64 h-64 md:w-96 md:h-96 mx-auto">
-              {/* Animated gradient ring */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full opacity-75 blur-sm animate-pulse"></div>
-              
-              {/* Profile image container */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl"
-              >
-                <img
-                  src="/profile.jpg"
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-              
-              {/* Floating badges - hidden on mobile */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="hidden md:flex absolute -right-4 top-10 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700"
-              >
-                <span className="text-2xl">⚛️</span>
-                <span className="ml-2 font-semibold text-gray-700 dark:text-gray-300">ReactJs</span>
-              </motion.div>
-              
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="hidden md:flex absolute -left-4 bottom-20 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700"
-              >
-                <span className="text-2xl">📱</span>
-                <span className="ml-2 font-semibold text-gray-700 dark:text-gray-300">React Native</span>
-              </motion.div>
-            </div>
+            {personalInfo.name}
+          </motion.p>
+
+          <motion.h1
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={2}
+            className="font-display mt-3 text-[3.5rem] font-medium leading-[0.95] text-fg sm:text-7xl lg:text-8xl"
+          >
+            Full-Stack
+            <br />
+            Developer<span className="text-accent-text">.</span>
+          </motion.h1>
+
+          {/* Accent rule + typed role */}
+          <motion.div
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={3}
+            className="mt-7 flex items-center gap-4"
+          >
+            <span className="h-px w-12 bg-accent" />
+            <span className="font-mono text-sm text-muted">
+              <span className="text-accent-text">$</span> {displayText}
+              <span className="ml-0.5 inline-block h-4 w-2 translate-y-0.5 animate-pulse bg-accent-text" />
+            </span>
+          </motion.div>
+
+          <motion.p
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={4}
+            className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
+          >
+            I build fast, refined web and mobile products with{" "}
+            <span className="font-medium text-fg">ReactJS</span>,{" "}
+            <span className="font-medium text-fg">Next.js</span>,{" "}
+            <span className="font-medium text-fg">NestJS</span>, and{" "}
+            <span className="font-medium text-fg">React Native</span>. Five-plus
+            years turning complex requirements into products people enjoy using.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={5}
+            className="mt-9 flex flex-wrap items-center gap-3"
+          >
+            <a
+              href="#projects"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-medium text-on-accent transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              View selected work
+              <ArrowUpRight
+                size={18}
+                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3.5 font-medium text-fg transition-colors hover:bg-soft"
+            >
+              Get in touch
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            variants={rise}
+            initial="hidden"
+            animate="show"
+            custom={6}
+            className="mt-12 flex flex-wrap gap-x-10 gap-y-6 border-t border-line pt-8"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <div className="font-display text-3xl font-semibold text-fg tnum">
+                  {stat.value}
+                </div>
+                <div className="mt-1 font-mono text-xs uppercase tracking-wider text-faint">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </motion.div>
         </div>
+
+        {/* ---- Right: portrait ---- */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-sm lg:col-span-5"
+        >
+          <div className="relative">
+            {/* Accent frame offset */}
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] border border-accent/40" aria-hidden="true" />
+
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-elev">
+              <img
+                src="/profile.png"
+                alt={`Portrait of ${personalInfo.name}`}
+                width={480}
+                height={560}
+                className="aspect-[4/5] w-full object-cover"
+              />
+              {/* Bottom caption bar */}
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-5 pb-4 pt-12">
+                <span className="flex items-center gap-1.5 font-mono text-xs text-white/90">
+                  <MapPin size={13} /> Hanoi, VN
+                </span>
+                <span className="rounded-full bg-accent px-2.5 py-1 font-mono text-[11px] font-semibold text-on-accent">
+                  5+ yrs
+                </span>
+              </div>
+            </div>
+
+            {/* Floating tech chips */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -left-5 top-10 flex items-center gap-2 rounded-xl border border-line bg-elev px-3 py-2 shadow-lg shadow-black/5"
+            >
+              <Code2 size={16} className="text-accent-text" />
+              <span className="font-mono text-xs text-fg">React</span>
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+              className="absolute -right-5 bottom-24 flex items-center gap-2 rounded-xl border border-line bg-elev px-3 py-2 shadow-lg shadow-black/5"
+            >
+              <Smartphone size={16} className="text-accent-text" />
+              <span className="font-mono text-xs text-fg">React Native</span>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-      
-      {/* Scroll indicator */}
-      <motion.div 
+
+      {/* Scroll cue */}
+      <motion.a
+        href="#about"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
-        className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-faint transition-colors hover:text-fg md:flex"
+        aria-label="Scroll to about section"
       >
-        <a href="#about" className="flex flex-col items-center text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-          <span className="text-sm mb-2">Scroll Down</span>
-          <ChevronDown size={24} />
-        </a>
-      </motion.div>
+        <span className="font-mono text-[11px] uppercase tracking-[0.2em]">Scroll</span>
+        <motion.span
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity }}
+        >
+          <ArrowDown size={16} />
+        </motion.span>
+      </motion.a>
     </section>
   );
 };

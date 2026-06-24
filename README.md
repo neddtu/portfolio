@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with React and TailwindCSS.
+A modern, responsive portfolio website for Ned, built with React and TailwindCSS.
 
 ![React](https://img.shields.io/badge/React-19.1.4-61DAFB?style=flat&logo=react&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
@@ -55,7 +55,7 @@ src/
 
 ```bash
 # Clone the repo
-git clone https://github.com/tucoi052/portfolio.git
+git clone https://github.com/neddtu/portfolio.git
 
 # Navigate to project
 cd portfolio
@@ -114,7 +114,7 @@ MIT License - feel free to use this for your own portfolio!
 
 ## 👤 Author
 
-**Duong Dinh Tu**
+**Ned**
 
-- GitHub: [@tucoi052](https://github.com/tucoi052)
-- Email: tucoi052@gmail.com
+- GitHub: [@neddtu](https://github.com/neddtu)
+- Email: tucoi229@gmail.com

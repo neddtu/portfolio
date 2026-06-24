@@ -1,159 +1,223 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Github, Send, Sparkles } from 'lucide-react';
-import { personalInfo } from '../data';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone, Github, ArrowUpRight, Check } from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import { personalInfo } from "../data";
+
+const channels = [
+  { icon: Mail, label: "Email", value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+  { icon: Phone, label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone}` },
+  { icon: MapPin, label: "Location", value: personalInfo.address, href: null },
+  { icon: Github, label: "GitHub", value: "@neddtu", href: personalInfo.github },
+];
 
 const Contact = () => {
-    return (
-        <section id="contact" className="py-12 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 transition-colors duration-300 relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-100 dark:bg-cyan-900/20 rounded-full blur-3xl opacity-50"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50"></div>
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
+  const [sent, setSent] = useState(false);
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+  const validate = (values) => {
+    const next = {};
+    if (!values.name.trim()) next.name = "Please tell me your name.";
+    if (!values.email.trim()) next.email = "An email so I can reply.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))
+      next.email = "That doesn't look like a valid email.";
+    if (!values.message.trim()) next.message = "What would you like to build?";
+    return next;
+  };
+
+  const update = (field) => (e) => {
+    setForm((f) => ({ ...f, [field]: e.target.value }));
+    if (errors[field]) setErrors((er) => ({ ...er, [field]: undefined }));
+  };
+
+  const onBlur = (field) => () => {
+    const fieldError = validate(form)[field];
+    setErrors((er) => ({ ...er, [field]: fieldError }));
+  };
+
+  // No backend — compose a real email via the user's mail client
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const found = validate(form);
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
+
+    const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`);
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+    setSent(true);
+    setTimeout(() => setSent(false), 5000);
+  };
+
+  const fieldClass = (field) =>
+    `w-full rounded-xl border bg-bg px-4 py-3.5 text-fg placeholder:text-faint outline-none transition-colors focus:border-accent ${
+      errors[field] ? "border-red-500/70" : "border-line"
+    }`;
+
+  return (
+    <section id="contact" className="relative px-6 py-24 md:py-36">
+      <div className="glow-blob pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 opacity-60" aria-hidden="true" />
+
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading index="04" label="Contact" align="center">
+          <span className="mx-auto block text-center">
+            Let's build something{" "}
+            <span className="text-accent-text italic">together</span>.
+          </span>
+        </SectionHeading>
+
+        <p className="mx-auto mt-6 max-w-xl text-center text-lg text-muted">
+          I'm open to new opportunities and collaborations. Have a question or a
+          project in mind? Drop a line — I usually reply within a day.
+        </p>
+
+        <div className="mt-16 grid gap-10 lg:grid-cols-12">
+          {/* Channels */}
+          <div className="lg:col-span-5">
+            <div className="grid gap-3">
+              {channels.map(({ icon: Icon, label, value, href }) => {
+                const Tag = href ? "a" : "div";
+                return (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-10 md:mb-16"
-                >
-                    <span className="inline-block px-4 py-2 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-sm font-medium mb-4">
-                        <Sparkles className="inline w-4 h-4 mr-1" />
-                        Get In Touch
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                        Let's{" "}
-                        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                            Connect
+                  >
+                    <Tag
+                      {...(href
+                        ? {
+                            href,
+                            ...(href.startsWith("http")
+                              ? { target: "_blank", rel: "noopener noreferrer" }
+                              : {}),
+                          }
+                        : {})}
+                      className="group flex items-center gap-4 rounded-2xl border border-line bg-elev p-4 transition-colors hover:border-line-strong"
+                    >
+                      <span className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl border border-line text-accent-text transition-colors group-hover:border-accent group-hover:bg-accent-soft">
+                        <Icon size={18} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block font-mono text-xs uppercase tracking-wider text-faint">
+                          {label}
                         </span>
-                    </h2>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full"></div>
-                </motion.div>
-
-                <div className="grid lg:grid-cols-2 gap-12">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Let's Talk</h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                            I'm currently open to new opportunities and collaborations.
-                            Whether you have a question or just want to say hi, feel free to reach out!
-                        </p>
-
-                        <div className="space-y-6">
-                            <motion.a 
-                                href={`mailto:${personalInfo.email}`}
-                                whileHover={{ x: 5 }}
-                                className="flex items-start gap-4 group cursor-pointer"
-                            >
-                                <div className="p-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all">
-                                    <Mail size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Email</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{personalInfo.email}</p>
-                                </div>
-                            </motion.a>
-
-                            <motion.a 
-                                href={`tel:${personalInfo.phone}`}
-                                whileHover={{ x: 5 }}
-                                className="flex items-start gap-4 group cursor-pointer"
-                            >
-                                <div className="p-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all">
-                                    <Phone size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Phone</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{personalInfo.phone}</p>
-                                </div>
-                            </motion.a>
-
-                            <motion.div 
-                                whileHover={{ x: 5 }}
-                                className="flex items-start gap-4 group"
-                            >
-                                <div className="p-4 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-2xl shadow-lg group-hover:shadow-xl transition-all">
-                                    <MapPin size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-semibold text-gray-900 dark:text-white">Location</h4>
-                                    <p className="text-gray-600 dark:text-gray-300">{personalInfo.address}</p>
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        <div className="mt-12">
-                            <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Follow Me</h4>
-                            <div className="flex gap-4">
-                                <motion.a 
-                                    href={personalInfo.github} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    whileHover={{ scale: 1.1, y: -3 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="p-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
-                                >
-                                    <Github size={24} />
-                                </motion.a>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700"
-                    >
-                        <form className="space-y-6">
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    className="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all"
-                                    placeholder="Your Name"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    className="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all"
-                                    placeholder="your@email.com"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                                <textarea
-                                    id="message"
-                                    rows="4"
-                                    className="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all resize-none"
-                                    placeholder="Your message..."
-                                ></textarea>
-                            </div>
-                            <motion.button
-                                type="submit"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
-                            >
-                                Send Message
-                                <Send size={20} />
-                            </motion.button>
-                        </form>
-                    </motion.div>
-                </div>
+                        <span className="block truncate text-fg">{value}</span>
+                      </span>
+                      {href && (
+                        <ArrowUpRight
+                          size={16}
+                          className="ml-auto text-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-text"
+                        />
+                      )}
+                    </Tag>
+                  </motion.div>
+                );
+              })}
             </div>
-        </section>
-    );
+          </div>
+
+          {/* Form */}
+          <motion.form
+            noValidate
+            onSubmit={onSubmit}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="rounded-3xl border border-line bg-elev p-6 sm:p-8 lg:col-span-7"
+          >
+            <div className="grid gap-5">
+              <div>
+                <label htmlFor="name" className="mb-2 block text-sm font-medium text-fg">
+                  Name <span className="text-accent-text">*</span>
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={form.name}
+                  onChange={update("name")}
+                  onBlur={onBlur("name")}
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-invalid={!!errors.name}
+                  className={fieldClass("name")}
+                />
+                {errors.name && (
+                  <p role="alert" className="mt-1.5 text-sm text-red-500">{errors.name}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm font-medium text-fg">
+                  Email <span className="text-accent-text">*</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={form.email}
+                  onChange={update("email")}
+                  onBlur={onBlur("email")}
+                  placeholder="you@email.com"
+                  autoComplete="email"
+                  aria-invalid={!!errors.email}
+                  className={fieldClass("email")}
+                />
+                {errors.email && (
+                  <p role="alert" className="mt-1.5 text-sm text-red-500">{errors.email}</p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="message" className="mb-2 block text-sm font-medium text-fg">
+                  Message <span className="text-accent-text">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  value={form.message}
+                  onChange={update("message")}
+                  onBlur={onBlur("message")}
+                  placeholder="Tell me about your project…"
+                  aria-invalid={!!errors.message}
+                  className={`${fieldClass("message")} resize-none`}
+                />
+                {errors.message && (
+                  <p role="alert" className="mt-1.5 text-sm text-red-500">{errors.message}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-medium text-on-accent transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                {sent ? (
+                  <>
+                    Opening your mail app <Check size={18} />
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <ArrowUpRight
+                      size={18}
+                      className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </>
+                )}
+              </button>
+              <p aria-live="polite" className="text-center font-mono text-xs text-faint">
+                {sent
+                  ? "Thanks! Your email draft is ready to send."
+                  : "Submitting opens a pre-filled draft in your email app."}
+              </p>
+            </div>
+          </motion.form>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;

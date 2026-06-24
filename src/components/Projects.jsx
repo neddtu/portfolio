@@ -1,82 +1,100 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Folder, Layers } from 'lucide-react';
-import { projects } from '../data';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Factory,
+  Shield,
+  Radio,
+  Image,
+  Smartphone,
+  Video,
+  ArrowUpRight,
+} from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import { projects } from "../data";
+
+// Map the data's icon keys to Lucide components (no emoji as icons)
+const ICONS = {
+  factory: Factory,
+  shield: Shield,
+  radio: Radio,
+  image: Image,
+  smartphone: Smartphone,
+  video: Video,
+};
 
 const Projects = () => {
-    return (
-        <section id="projects" className="py-12 md:py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300 relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50"></div>
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50"></div>
+  return (
+    <section id="projects" className="relative px-6 py-24 md:py-36">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading index="03" label="Selected Work">
+            Things I've <span className="text-accent-text italic">built</span>.
+          </SectionHeading>
+          <a
+            href={projects.length ? "#contact" : undefined}
+            className="hidden font-mono text-sm text-muted transition-colors hover:text-fg sm:inline-flex sm:items-center sm:gap-1.5"
+          >
+            Want something built? <ArrowUpRight size={15} />
+          </a>
+        </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-10 md:mb-16"
-                >
-                    <span className="inline-block px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-4">
-                        <Folder className="inline w-4 h-4 mr-1" />
-                        My Work
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                        Featured{" "}
-                        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                            Projects
-                        </span>
-                    </h2>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 mx-auto rounded-full"></div>
-                </motion.div>
+        <div className="mt-16 grid gap-5 md:grid-cols-2">
+          {projects.map((project, index) => {
+            const Icon = ICONS[project.icon] || Factory;
+            return (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.55, delay: (index % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative overflow-hidden rounded-3xl border border-line bg-elev p-7 transition-all duration-300 hover:-translate-y-1 hover:border-line-strong"
+              >
+                {/* hover accent wash */}
+                <div className="glow-blob pointer-events-none absolute -right-16 -top-16 h-48 w-48 opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            whileHover={{ y: -8 }}
-                            className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-                        >
-                            {/* Gradient header */}
-                            <div className={`h-2 bg-gradient-to-r ${project.gradient}`}></div>
-                            
-                            <div className="p-6">
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-3xl">{project.icon}</span>
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                            {project.title}
-                                        </h3>
-                                    </div>
-                                    <Layers className="text-gray-300 dark:text-gray-600 group-hover:text-blue-500 transition-colors" size={20} />
-                                </div>
-                                
-                                <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm leading-relaxed line-clamp-3">
-                                    {project.description}
-                                </p>
-                                
-                                <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag, i) => (
-                                        <span
-                                            key={i}
-                                            className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                <div className="relative flex items-start justify-between">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl border border-line text-accent-text transition-colors duration-300 group-hover:border-accent group-hover:bg-accent-soft">
+                    <Icon size={20} />
+                  </span>
+                  <span className="font-display text-5xl font-medium leading-none text-line-strong tnum transition-colors duration-300 group-hover:text-accent-soft">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-            </div>
-        </section>
-    );
+
+                <div className="relative mt-6">
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
+                    {project.category}
+                  </p>
+                  <h3 className="mt-2 flex items-center gap-2 font-display text-2xl font-medium text-fg">
+                    {project.title}
+                    <ArrowUpRight
+                      size={18}
+                      className="text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                    />
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="relative mt-6 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-line px-2.5 py-1 font-mono text-[11px] text-faint"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Projects;
