@@ -120,7 +120,7 @@ const Hero = () => {
             <span className="font-medium text-fg">ReactJS</span>,{" "}
             <span className="font-medium text-fg">Next.js</span>,{" "}
             <span className="font-medium text-fg">NestJS</span>, and{" "}
-            <span className="font-medium text-fg">React Native</span>. Five-plus
+            <span className="font-medium text-fg">React Native</span>. Six-plus
             years turning complex requirements into products people enjoy using.
           </motion.p>
 
@@ -196,7 +196,7 @@ const Hero = () => {
                   <MapPin size={13} /> Hanoi, VN
                 </span>
                 <span className="rounded-full bg-accent px-2.5 py-1 font-mono text-[11px] font-semibold text-on-accent">
-                  5+ yrs
+                  6+ yrs
                 </span>
               </div>
             </div>

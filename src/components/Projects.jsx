@@ -7,6 +7,8 @@ import {
   Image,
   Smartphone,
   Video,
+  CandlestickChart,
+  ShoppingBag,
   ArrowUpRight,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -20,6 +22,8 @@ const ICONS = {
   image: Image,
   smartphone: Smartphone,
   video: Video,
+  trading: CandlestickChart,
+  shop: ShoppingBag,
 };
 
 const Projects = () => {

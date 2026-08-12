@@ -13,7 +13,7 @@ const Experience = () => {
       <div className="mx-auto max-w-6xl">
         <SectionHeading index="02" label="Experience">
           Where I've spent <br className="hidden sm:block" />
-          the last <span className="text-accent-text italic">five years</span>.
+          the last <span className="text-accent-text italic">six years</span>.
         </SectionHeading>
 
         <div className="mt-16 max-w-3xl">

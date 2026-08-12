@@ -52,18 +52,20 @@ const About = () => {
               className="space-y-5 text-lg leading-relaxed text-muted"
             >
               <p>
-                I'm an accomplished React developer with{" "}
-                <span className="font-medium text-fg">5+ years</span> of
-                experience across software design, analysis, and development —
-                fluent in JavaScript and TypeScript on ReactJS, NextJS, and
-                React Native.
+                I'm a React / React Native developer with{" "}
+                <span className="font-medium text-fg">6+ years</span> of
+                experience building web and mobile products — fluent in
+                JavaScript and TypeScript on ReactJS, NextJS, and React Native,
+                with modern state and data layers like Redux, React Query, and
+                RTK Query.
               </p>
               <p>
-                I take pride in writing clean, maintainable code and in the
-                willingness to learn whatever a problem needs. Beyond the
-                frontend, I work with animations, backend stacks like NodeJS and
-                NestJS, and the full path of shipping apps to the Play Store and
-                App Store.
+                I work across the full development lifecycle: requirements
+                analysis, UI implementation, API integration, performance
+                optimization, testing, deployment, and production support. I'm
+                comfortable with real-time communication, push notifications,
+                and native mobile capabilities — plus backend stacks like NodeJS
+                and NestJS when a feature needs it.
               </p>
             </motion.div>
 

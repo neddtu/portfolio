@@ -7,7 +7,7 @@ export const personalInfo = {
   name: "Ned",
   firstName: "Ned",
   role: "Full-Stack Developer",
-  email: "tucoi229@gmail.com",
+  email: "tucoi052@gmail.com",
   phone: "0855654257",
   address: "339 Minh Khai, Hai Ba Trung, Ha Noi",
   github: "https://github.com/neddtu",
@@ -19,15 +19,15 @@ export const personalInfo = {
 export const roles = [
   "ReactJS Developer",
   "Next.js Developer",
-  "NestJS Developer",
   "React Native Developer",
+  "NestJS Developer",
 ];
 
 // Headline stats
 export const stats = [
-  { value: "5+", label: "Years of experience" },
+  { value: "6+", label: "Years of experience" },
   { value: "10+", label: "Projects shipped" },
-  { value: "3", label: "Companies" },
+  { value: "5", label: "Companies" },
 ];
 
 // Skills grouped by discipline (rendered as a structured list + marquee)
@@ -41,19 +41,36 @@ export const skillGroups = [
       "JavaScript",
       "HTML / CSS",
       "Redux",
+      "Redux Toolkit",
       "Zustand",
-      "Recoil",
-      "React Hooks",
-      "Apollo",
+      "React Query",
+      "RTK Query",
     ],
   },
   {
-    label: "Mobile",
-    items: ["React Native", "Reanimated", "CodePush", "Agora Livestream"],
+    label: "UI & Styling",
+    items: ["Ant Design", "MUI", "Radix UI", "Tailwind CSS", "Styled Components"],
   },
   {
-    label: "Backend & Realtime",
-    items: ["NodeJS", "NestJS", "Firebase", "Socket.IO", "WebRTC"],
+    label: "Mobile",
+    items: [
+      "React Native",
+      "Native Modules",
+      "Reanimated",
+      "Lottie",
+      "FlashList",
+      "Notifee",
+      "CodePush",
+      "Firebase Push",
+    ],
+  },
+  {
+    label: "Realtime",
+    items: ["Socket.IO", "WebRTC", "Agora", "Janus"],
+  },
+  {
+    label: "Backend & Data",
+    items: ["NodeJS", "NestJS", "REST API", "PostgreSQL", "Firebase / Firestore"],
   },
 ];
 
@@ -63,7 +80,7 @@ export const skills = skillGroups.flatMap((group) => group.items);
 // Work history (most recent first)
 export const experiences = [
   {
-    title: "React Developer",
+    title: "React / React Native Developer",
     company: "CMC Global",
     period: "3/2022 — Present",
     location: "Hanoi, Vietnam",
@@ -76,9 +93,31 @@ export const experiences = [
     ],
   },
   {
+    title: "Freelance React Native Developer",
+    company: "Eastplayers",
+    period: "06/2022 — 08/2022",
+    location: "Remote",
+    current: false,
+    description: [
+      "Built cross-platform mobile UI and integrated APIs",
+      "Ensured clean and optimized code quality",
+    ],
+  },
+  {
+    title: "Freelance React Native Developer",
+    company: "Trixgo",
+    period: "11/2021 — 03/2022",
+    location: "Remote",
+    current: false,
+    description: [
+      "Built cross-platform mobile UI and integrated APIs",
+      "Ensured clean and optimized code quality",
+    ],
+  },
+  {
     title: "React Native Developer",
     company: "PAL VN",
-    period: "2/2021 — 3/2022",
+    period: "02/2021 — 03/2022",
     location: "Hanoi, Vietnam",
     current: false,
     description: [
@@ -103,6 +142,14 @@ export const experiences = [
 
 // Featured projects. `icon` maps to a Lucide icon in the Projects component.
 export const projects = [
+  {
+    title: "OTC Platform",
+    category: "Fintech · Web",
+    icon: "trading",
+    description:
+      "OTC trading platform for digital assets — user onboarding, KYC verification, order management, and transaction processing.",
+    tags: ["ReactJS", "TypeScript", "Redux", "RTK Query", "Socket.IO", "Antd"],
+  },
   {
     title: "KSP Steel",
     category: "Enterprise · Web",
@@ -149,7 +196,15 @@ export const projects = [
     icon: "video",
     description:
       "Video platform for remote teams — secure meetings, live streaming, and collaboration powering productivity.",
-    tags: ["React Native", "TypeScript", "WebRTC", "Socket.IO", "Redux"],
+    tags: ["React Native", "TypeScript", "WebRTC", "Socket.IO", "Janus"],
+  },
+  {
+    title: "Bigfast Shop",
+    category: "E-commerce · Mobile",
+    icon: "shop",
+    description:
+      "Shopping app for registered stores to sell fashion and cosmetic products, with real-time chat between shops and customers.",
+    tags: ["React Native", "TypeScript", "Redux", "Socket.IO", "WebRTC", "Firebase"],
   },
 ];
 
@@ -164,7 +219,7 @@ export const menuItems = [
 export const education = {
   school: "Water Resources University",
   major: "Information Technology",
-  period: "09/2017 — 2021",
+  period: "09/2017 — 06/2021",
 };
 
 export const activities = {

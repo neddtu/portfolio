@@ -117,4 +117,4 @@ MIT License - feel free to use this for your own portfolio!
 **Ned**
 
 - GitHub: [@neddtu](https://github.com/neddtu)
-- Email: tucoi229@gmail.com
+- Email: tucoi052@gmail.com
