@@ -27,7 +27,7 @@ export const roles = [
 export const stats = [
   { value: "6+", label: "Years of experience" },
   { value: "10+", label: "Projects shipped" },
-  { value: "5", label: "Companies" },
+  { value: "3", label: "Companies" },
 ];
 
 // Skills grouped by discipline (rendered as a structured list + marquee)
