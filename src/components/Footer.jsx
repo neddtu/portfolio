@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, ArrowUpRight } from "lucide-react";
 import { personalInfo, menuItems } from "../data";
 
 const Footer = () => {
@@ -28,14 +28,24 @@ const Footer = () => {
             </a>
           </div>
 
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-3 text-sm font-medium text-fg transition-colors hover:border-accent hover:bg-accent-soft"
-          >
-            <Github size={18} /> GitHub
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-3 text-sm font-medium text-fg transition-colors hover:border-accent hover:bg-accent-soft"
+            >
+              <Github size={18} /> GitHub
+            </a>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-3 text-sm font-medium text-fg transition-colors hover:border-accent hover:bg-accent-soft"
+            >
+              <Linkedin size={18} /> LinkedIn
+            </a>
+          </div>
         </div>
 
         {/* Bottom row */}

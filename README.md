@@ -2,6 +2,8 @@
 
 A modern, responsive portfolio website for Ned, built with React and TailwindCSS.
 
+Live at **[neddtu.dev](https://neddtu.dev)**.
+
 ![React](https://img.shields.io/badge/React-19.1.4-61DAFB?style=flat&logo=react&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=flat&logo=vite&logoColor=white)
@@ -96,7 +98,7 @@ The site will be available at `http://localhost:2211`
 
 All content is centralized in `src/data/index.js`:
 
-- `personalInfo` - Name, email, phone, GitHub, CV path
+- `personalInfo` - Name, email, phone, GitHub, LinkedIn, website, CV path
 - `roles` - Typing animation roles
 - `stats` - Experience statistics
 - `skills` - Technical skills list
