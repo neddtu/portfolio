@@ -6,23 +6,21 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-line px-6 pt-20 pb-10">
-      <div className="glow-blob pointer-events-none absolute -bottom-32 left-1/2 h-72 w-96 -translate-x-1/2 opacity-50" aria-hidden="true" />
-
+    <footer className="relative border-t border-line px-6 pt-16 pb-10">
       <div className="relative mx-auto max-w-6xl">
         {/* Big call to action */}
-        <div className="flex flex-col items-start justify-between gap-10 border-b border-line pb-14 lg:flex-row lg:items-end">
+        <div className="flex flex-col items-start justify-between gap-8 border-b border-line pb-12 lg:flex-row lg:items-end">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-faint">
+            <p className="text-sm text-muted">
               Let's talk
             </p>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="group mt-4 inline-flex items-center gap-3 font-display text-4xl font-medium leading-tight text-fg sm:text-6xl"
+              className="group mt-3 inline-flex items-center gap-3 break-all font-display text-3xl font-semibold leading-tight text-fg sm:text-5xl"
             >
               {personalInfo.email}
               <ArrowUpRight
-                size={36}
+                size={32}
                 className="text-accent-text transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
               />
             </a>
@@ -54,7 +52,7 @@ const Footer = () => {
             <span className="grid h-7 w-7 place-items-center rounded-md bg-accent font-display text-sm font-bold text-on-accent">
               {personalInfo.firstName.charAt(0)}
             </span>
-            <p className="font-mono text-xs text-faint">
+            <p className="text-sm text-faint">
               © {year} {personalInfo.name}
             </p>
           </div>
@@ -64,14 +62,14 @@ const Footer = () => {
               <a
                 key={item.title}
                 href={item.href}
-                className="font-mono text-xs uppercase tracking-wider text-faint transition-colors hover:text-fg"
+                className="py-2 text-sm text-faint transition-colors hover:text-fg"
               >
                 {item.title}
               </a>
             ))}
           </nav>
 
-          <p className="font-mono text-xs text-faint">
+          <p className="text-sm text-faint">
             Built with React &amp; Tailwind
           </p>
         </div>
