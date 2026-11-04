@@ -11,7 +11,7 @@ export const personalInfo = {
   phone: "0855654257",
   address: "339 Minh Khai, Hai Ba Trung, Ha Noi",
   github: "https://github.com/neddtu",
-  linkedin: "https://www.linkedin.com/in/ned-d%C6%B0%C6%A1ng-760b5b448/",
+  linkedin: "https://www.linkedin.com/in/neddtu/",
   website: "https://neddtu.dev",
   cvPath: "/Duong-Dinh-Tu-CV.pdf",
   available: true,
@@ -139,12 +139,12 @@ export const experiences = [
 // Optional `link` makes the card title an external link.
 export const projects = [
   {
-    title: "BCD — AI Crypto Lookup",
-    category: "AI · Freelance",
-    icon: "bot",
+    title: "OTC Platform",
+    category: "Fintech · Web",
+    icon: "trading",
     description:
-      "RAG-powered app for looking up coin and crypto information from an existing knowledge base — content is embedded into pgvector, retrieved by semantic search, and answered by an AI model grounded in the source data.",
-    tags: ["OpenAI API", "RAG", "pgvector", "PostgreSQL"],
+      "OTC trading platform for digital assets — user onboarding, KYC verification, order management, and transaction processing.",
+    tags: ["ReactJS", "TypeScript", "Redux", "RTK Query", "Socket.IO", "Antd"],
   },
   {
     title: "Zalo Mini App Skills",
@@ -156,12 +156,12 @@ export const projects = [
     tags: ["Claude Skills", "ZMP SDK", "ZaUI", "MIT"],
   },
   {
-    title: "OTC Platform",
-    category: "Fintech · Web",
-    icon: "trading",
+    title: "BCD — AI Crypto Lookup",
+    category: "AI · Freelance",
+    icon: "bot",
     description:
-      "OTC trading platform for digital assets — user onboarding, KYC verification, order management, and transaction processing.",
-    tags: ["ReactJS", "TypeScript", "Redux", "RTK Query", "Socket.IO", "Antd"],
+      "RAG-powered app for looking up coin and crypto information from an existing knowledge base — content is embedded into pgvector, retrieved by semantic search, and answered by an AI model grounded in the source data.",
+    tags: ["OpenAI API", "RAG", "pgvector", "PostgreSQL"],
   },
   {
     title: "KSP Steel",
