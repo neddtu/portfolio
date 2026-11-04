@@ -42,7 +42,7 @@ const Hero = () => {
             custom={1}
             className="mt-6"
           >
-            <span className="block text-lg font-medium text-muted sm:text-xl">
+            <span className="font-display block text-2xl font-semibold text-muted sm:text-3xl lg:text-4xl">
               Hi, I'm {personalInfo.name}.
             </span>
             <span className="font-display mt-2 block text-5xl font-semibold leading-[1.05] text-fg sm:text-6xl lg:text-7xl">
