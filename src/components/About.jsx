@@ -52,28 +52,16 @@ const About = () => {
               className="space-y-5 text-lg leading-relaxed text-muted"
             >
               <p>
-                I'm a React / React Native developer with{" "}
-                <span className="font-medium text-fg">6+ years</span> of
-                experience building web and mobile products — fluent in
-                JavaScript and TypeScript on ReactJS, NextJS, and React Native,
-                with modern state and data layers like Redux, React Query, and
-                RTK Query.
+                Full-stack developer with{" "}
+                <span className="font-medium text-fg">6+ years</span> shipping
+                web and mobile products in ReactJS, Next.js, NestJS, and React
+                Native.
               </p>
               <p>
-                I work across the full development lifecycle: requirements
-                analysis, UI implementation, API integration, performance
-                optimization, testing, deployment, and production support. I'm
-                comfortable with real-time communication, push notifications,
-                and native mobile capabilities — plus backend stacks like NodeJS
-                and NestJS when a feature needs it.
-              </p>
-              <p>
-                Lately I've been building{" "}
-                <span className="font-medium text-fg">AI-powered products</span>{" "}
-                — integrating AI APIs (OpenAI), building RAG pipelines with
-                embeddings and pgvector on PostgreSQL, and writing open-source
-                agent skills that help AI coding tools like Claude Code ship
-                faster.
+                Now building{" "}
+                <span className="font-medium text-fg">AI features</span> too —
+                OpenAI API integration, RAG with pgvector, and open-source agent
+                skills.
               </p>
             </motion.div>
 
