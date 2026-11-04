@@ -57,25 +57,19 @@ const Contact = () => {
     }`;
 
   return (
-    <section id="contact" className="relative px-6 py-24 md:py-36">
-      <div className="glow-blob pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 opacity-60" aria-hidden="true" />
+    <section id="contact" className="relative px-6 py-20 md:py-28">
 
       <div className="mx-auto max-w-6xl">
-        <SectionHeading index="04" label="Contact" align="center">
-          <span className="mx-auto block text-center">
-            Let's build something{" "}
-            <span className="text-accent-text italic">together</span>.
-          </span>
+        <SectionHeading
+          align="center"
+          lead="I'm open to new roles and freelance work. Email is the fastest way to reach me."
+        >
+          Contact
         </SectionHeading>
 
-        <p className="mx-auto mt-6 max-w-xl text-center text-lg text-muted">
-          I'm open to new opportunities and collaborations. Have a question or a
-          project in mind? Drop a line — I usually reply within a day.
-        </p>
-
-        <div className="mt-16 grid gap-10 lg:grid-cols-12">
+        <div className="mt-12 grid gap-10 lg:grid-cols-12">
           {/* Channels */}
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <div className="grid gap-3">
               {channels.map(({ icon: Icon, label, value, href }) => {
                 const Tag = href ? "a" : "div";
@@ -102,7 +96,7 @@ const Contact = () => {
                         <Icon size={18} />
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-mono text-xs uppercase tracking-wider text-faint">
+                        <span className="block text-sm text-muted">
                           {label}
                         </span>
                         <span className="block truncate text-fg">{value}</span>
@@ -208,7 +202,7 @@ const Contact = () => {
                   </>
                 )}
               </button>
-              <p aria-live="polite" className="text-center font-mono text-xs text-faint">
+              <p aria-live="polite" className="text-center text-sm text-faint">
                 {sent
                   ? "Thanks! Your email draft is ready to send."
                   : "Submitting opens a pre-filled draft in your email app."}

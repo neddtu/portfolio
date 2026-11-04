@@ -17,15 +17,6 @@ export const personalInfo = {
   available: true,
 };
 
-// Rotating roles for the hero typing line
-export const roles = [
-  "ReactJS Developer",
-  "Next.js Developer",
-  "React Native Developer",
-  "NestJS Developer",
-  "AI Integration Developer",
-];
-
 // Headline stats
 export const stats = [
   { value: "6+", label: "Years of experience" },
@@ -80,9 +71,6 @@ export const skillGroups = [
     items: ["OpenAI API", "RAG", "pgvector", "Prompt Engineering", "Agent Skills", "Claude Code"],
   },
 ];
-
-// Flat list derived from groups — used by the scrolling skills ribbon
-export const skills = skillGroups.flatMap((group) => group.items);
 
 // Work history (most recent first)
 export const experiences = [
@@ -237,7 +225,7 @@ export const projects = [
 export const menuItems = [
   { title: "About", href: "#about" },
   { title: "Experience", href: "#experience" },
-  { title: "Work", href: "#projects" },
+  { title: "Projects", href: "#projects" },
   { title: "Contact", href: "#contact" },
 ];
 

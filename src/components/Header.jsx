@@ -57,9 +57,8 @@ const Header = () => {
           <span className="grid h-7 w-7 place-items-center rounded-md bg-accent font-display text-sm font-bold text-on-accent">
             {personalInfo.firstName.charAt(0)}
           </span>
-          <span className="font-mono text-sm tracking-tight text-fg">
+          <span className="text-sm font-semibold text-fg">
             {personalInfo.name}
-            <span className="text-accent-text">.</span>
           </span>
         </a>
 
@@ -118,7 +117,7 @@ const Header = () => {
             className="fixed inset-0 z-50 bg-bg/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex items-center justify-between px-6 h-20">
-              <span className="font-mono text-sm text-fg">menu</span>
+              <span className="text-sm text-fg">Menu</span>
               <button
                 onClick={() => setIsOpen(false)}
                 className="grid h-10 w-10 place-items-center rounded-full border border-line text-fg"
@@ -136,11 +135,8 @@ const Header = () => {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 + i * 0.05 }}
-                  className="flex items-baseline gap-4 border-b border-line py-5 font-display text-4xl text-fg"
+                  className="border-b border-line py-5 font-display text-3xl font-semibold text-fg"
                 >
-                  <span className="font-mono text-sm text-accent-text tnum">
-                    0{i + 1}
-                  </span>
                   {item.title}
                 </motion.a>
               ))}
