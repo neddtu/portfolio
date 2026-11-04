@@ -185,7 +185,7 @@ export const projects = [
     icon: "radio",
     description:
       "Live-streaming mobile app — improving user experience, real-time interaction features, and overall platform stability.",
-    tags: ["React Native", "TypeScript", "React Query", "Zustand", "Reanimated 3"],
+    tags: ["React Native", "TypeScript", "React Query", "Zustand", "Reanimated"],
   },
   {
     title: "Biollet Admin",
