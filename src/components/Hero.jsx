@@ -57,9 +57,9 @@ const Hero = () => {
             custom={2}
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
           >
-            6+ years building web and mobile apps with React, React Native and
-            NestJS, from first commit to the App Store. Now I make them smarter
-            with OpenAI and RAG.
+            6+ years shipping web and mobile products with ReactJS, Next.js,
+            NestJS and React Native. Now building AI features too: OpenAI API,
+            RAG with pgvector, and open-source agent skills.
           </motion.p>
 
           {/* CTAs */}
