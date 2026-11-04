@@ -40,9 +40,14 @@ const Hero = () => {
             initial="hidden"
             animate="show"
             custom={1}
-            className="font-display mt-6 text-4xl font-semibold leading-[1.1] text-fg sm:text-5xl lg:text-6xl"
+            className="mt-6"
           >
-            Hi, I'm {personalInfo.name}. I build web, mobile and AI products.
+            <span className="block text-lg font-medium text-muted sm:text-xl">
+              Hi, I'm {personalInfo.name}.
+            </span>
+            <span className="font-display mt-2 block text-5xl font-semibold leading-[1.05] text-fg sm:text-6xl lg:text-7xl">
+              Code it, ship it, make it smart.
+            </span>
           </motion.h1>
 
           <motion.p
