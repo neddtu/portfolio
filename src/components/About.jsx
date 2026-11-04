@@ -67,6 +67,14 @@ const About = () => {
                 and native mobile capabilities — plus backend stacks like NodeJS
                 and NestJS when a feature needs it.
               </p>
+              <p>
+                Lately I've been building{" "}
+                <span className="font-medium text-fg">AI-powered products</span>{" "}
+                — integrating AI APIs (OpenAI), building RAG pipelines with
+                embeddings and pgvector on PostgreSQL, and writing open-source
+                agent skills that help AI coding tools like Claude Code ship
+                faster.
+              </p>
             </motion.div>
 
             <motion.div

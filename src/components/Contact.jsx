@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Github, ArrowUpRight, Check } from "lucide-react";
+import { Mail, MapPin, Phone, Github, Linkedin, ArrowUpRight, Check } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { personalInfo } from "../data";
 
@@ -9,6 +9,7 @@ const channels = [
   { icon: Phone, label: "Phone", value: personalInfo.phone, href: `tel:${personalInfo.phone}` },
   { icon: MapPin, label: "Location", value: personalInfo.address, href: null },
   { icon: Github, label: "GitHub", value: "@neddtu", href: personalInfo.github },
+  { icon: Linkedin, label: "LinkedIn", value: "Ned Dương", href: personalInfo.linkedin },
 ];
 
 const Contact = () => {

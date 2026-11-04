@@ -11,6 +11,8 @@ export const personalInfo = {
   phone: "0855654257",
   address: "339 Minh Khai, Hai Ba Trung, Ha Noi",
   github: "https://github.com/neddtu",
+  linkedin: "https://www.linkedin.com/in/ned-d%C6%B0%C6%A1ng-760b5b448/",
+  website: "https://neddtu.dev",
   cvPath: "/Duong-Dinh-Tu-CV.pdf",
   available: true,
 };
@@ -21,6 +23,7 @@ export const roles = [
   "Next.js Developer",
   "React Native Developer",
   "NestJS Developer",
+  "AI Integration Developer",
 ];
 
 // Headline stats
@@ -72,6 +75,10 @@ export const skillGroups = [
     label: "Backend & Data",
     items: ["NodeJS", "NestJS", "REST API", "PostgreSQL", "Firebase / Firestore"],
   },
+  {
+    label: "AI",
+    items: ["OpenAI API", "RAG", "pgvector", "Prompt Engineering", "Agent Skills", "Claude Code"],
+  },
 ];
 
 // Flat list derived from groups — used by the scrolling skills ribbon
@@ -80,7 +87,7 @@ export const skills = skillGroups.flatMap((group) => group.items);
 // Work history (most recent first)
 export const experiences = [
   {
-    title: "React / React Native Developer",
+    title: "Full-Stack Developer",
     company: "CMC Global",
     period: "3/2022 — Present",
     location: "Hanoi, Vietnam",
@@ -141,7 +148,25 @@ export const experiences = [
 ];
 
 // Featured projects. `icon` maps to a Lucide icon in the Projects component.
+// Optional `link` makes the card title an external link.
 export const projects = [
+  {
+    title: "BCD — AI Crypto Lookup",
+    category: "AI · Freelance",
+    icon: "bot",
+    description:
+      "RAG-powered app for looking up coin and crypto information from an existing knowledge base — content is embedded into pgvector, retrieved by semantic search, and answered by an AI model grounded in the source data.",
+    tags: ["OpenAI API", "RAG", "pgvector", "PostgreSQL"],
+  },
+  {
+    title: "Zalo Mini App Skills",
+    category: "AI · Open Source",
+    icon: "puzzle",
+    link: "https://github.com/neddtu/zalo-mini-app-skills",
+    description:
+      "Agent skill that helps AI coding agents build Zalo Mini Apps, kept up to date with the latest official docs — ZMP SDK, ZaUI, payments, Open APIs, eKYC, and DevTools.",
+    tags: ["Claude Skills", "ZMP SDK", "ZaUI", "MIT"],
+  },
   {
     title: "OTC Platform",
     category: "Fintech · Web",

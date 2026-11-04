@@ -9,6 +9,8 @@ import {
   Video,
   CandlestickChart,
   ShoppingBag,
+  Bot,
+  Puzzle,
   ArrowUpRight,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
@@ -24,6 +26,8 @@ const ICONS = {
   video: Video,
   trading: CandlestickChart,
   shop: ShoppingBag,
+  bot: Bot,
+  puzzle: Puzzle,
 };
 
 const Projects = () => {
@@ -70,12 +74,30 @@ const Projects = () => {
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-faint">
                     {project.category}
                   </p>
-                  <h3 className="mt-2 flex items-center gap-2 font-display text-2xl font-medium text-fg">
-                    {project.title}
-                    <ArrowUpRight
-                      size={18}
-                      className="text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
-                    />
+                  <h3 className="mt-2 font-display text-2xl font-medium text-fg">
+                    {project.link ? (
+                      // Stretched link: the whole card becomes clickable
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 after:absolute after:inset-0 after:content-['']"
+                      >
+                        {project.title}
+                        <ArrowUpRight
+                          size={18}
+                          className="text-accent-text transition-transform duration-300 group-hover:translate-x-0.5"
+                        />
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        {project.title}
+                        <ArrowUpRight
+                          size={18}
+                          className="text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                        />
+                      </span>
+                    )}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted">
                     {project.description}
